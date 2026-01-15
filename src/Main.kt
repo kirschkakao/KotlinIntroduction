@@ -1,3 +1,5 @@
+import kotlin.system.measureTimeMillis
+
 fun main() {
     /*println(firstLetterChar)
     wahr = false
@@ -83,6 +85,22 @@ fun main() {
     //normalThread()
     println("start")
     //coroutine()
-    leightweightExample()
+    //leightweightExample()
+
+    val time = measureTimeMillis {
+        notParallelExample()
+    }
+    println(time)
+
+    val time2 = measureTimeMillis {
+        awaitExample()
+    }
+    println(time2)
+
+    val time3 = measureTimeMillis {
+        awaitAllExample()
+    }
+    println(time3)
+
 
 }
