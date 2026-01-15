@@ -31,9 +31,11 @@ val frequencyNameList:List<Pair<String, Int>> = crazyNameList
     .groupBy { it }
     .map{ Pair(it.key, it.value.size)}
     .sortedByDescending { (_, size) -> size }
+    .toList()
 
 val integerList: List<Int?> = listOf(1,2,3,4,5,6,7,8,9, null)
 val summedList = integerList.fold(0) {acc, i -> acc + (i ?: 0)*2}
+val otherSum = integerList.sumOf { (it?:0) } * 2
 
 //map null safety
 fun printBooksFromAuthor(author: String) {

@@ -3,6 +3,8 @@ import java.util.*
 //Collections
 //Pair
 val coordinate: Pair<Int, Int> = Pair(0, 0)
+val gps = 0.1 to -0.5
+val andHeight: Triple<Int, Int, Int> = Triple(0,0,0)
 
 //List
 //List<T> -> generic type

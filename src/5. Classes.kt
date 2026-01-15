@@ -33,7 +33,7 @@ class Car(
     val engineType: EngineType
 ) : Vehicle(modelName, terrainType) {
     override fun buildOutputString(): String {
-        return "${super.buildOutputString()} and has a ${capitalizeFirstChar(engineType.toString())}"
+        return "${super.buildOutputString()} and has a ${capitalizeFirstChar(engineType.toString())} engine"
     }
 }
 
@@ -58,8 +58,7 @@ enum class PlayerColor {
     BLUE, BLACK
 }
 
-class Player private constructor (playerColor: PlayerColor) {
-    val playerColor: PlayerColor = playerColor
+class Player private constructor (val playerColor: PlayerColor) {
     private var points: Int = 0
 
     companion object {
@@ -93,12 +92,28 @@ object AppContainer {
 }
 
 //abstract class
-abstract class Person(val name: String) {
+abstract class Person(protected val name: String) {
+    private var callCount: Int = 0
+    protected fun logCalls() {
+        callCount++
+        println("Schon $callCount mal gecallt.")
+    }
+
     abstract fun greet()
 }
 
 class Dominik: Person("Dominik"){
-    override fun greet() = println("Hallo")
+    override fun greet() {
+        println("Hallo, mein Name ist $name")
+        logCalls()
+    }
+}
+
+class Anna: Person("Anna"){
+    override fun greet(){
+        println("Hi, ich bin $name")
+        logCalls()
+    }
 }
 
 //Interface

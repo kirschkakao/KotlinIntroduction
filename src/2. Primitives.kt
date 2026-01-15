@@ -20,6 +20,7 @@ val firstLetterStrings: String = "$firstLetterChar"
 //Numbers
 val age: Short = 36 //16bit
 val salary: Int = 2147483647 // 32bit
+val newSalary = salary + 1
 val salaryAfterPromotion: Long = salary + 1L //64bit
 val veryLargeNumber = BigInteger("123456789123456789123456789123456789123456789")
 

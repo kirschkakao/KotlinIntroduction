@@ -1,3 +1,4 @@
+import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -14,11 +15,10 @@ fun normalThread() {
 
 fun coroutine() = runBlocking {
     defineConsulting()
-    val job = launch {
-        delay(2000)
+    launch {
+        delay(1000)
         println("Hallo")
-
-    }.join()
+    }
     println(dFine)
 }
 

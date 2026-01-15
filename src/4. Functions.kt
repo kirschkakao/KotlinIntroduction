@@ -32,8 +32,14 @@ enum class Himmelsrichtungen {
     NORDEN, OSTEN, SUEDEN, WESTEN
 }
 
-/*fun List<Int>.printTypeInfo() {
+/*
+fun List<Int>.printTypeInfo() {
     println("This is a list with elements of type ${Int::class}")
+}*/
+
+/*
+fun <T> List<T>.printTypeInfo(){
+    println("This is a list with elements of type ${T::class}")
 }*/
 
 inline fun <reified T: Any> List<T>.printTypeInfo() {
