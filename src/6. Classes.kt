@@ -1,10 +1,18 @@
-//Classes and Objects
-enum class TerrainType{
-    LAND, WATER, AIR
+// ===== Chapter 6: Classes and Objects =====
+
+// === Basic Classes ===
+class Person(
+    val firstName: String,
+    val lastName: String
+) {
+    fun greet() {
+        println("Hello, my name is $firstName $lastName")
+    }
 }
 
-enum class EngineType {
-    ELECTRIC, COMBUSTION
+// === Open Classes ===
+enum class TerrainType {
+    LAND, WATER, AIR
 }
 
 open class Vehicle(
@@ -21,10 +29,19 @@ open class Vehicle(
         println(buildOutputString())
     }
 
+    fun whatsGoingOn(s: String): String {
+        return modelName
+    }
+
     companion object {
         private var numOfPrintedVehicles: Int = 0
         fun getNumOfPrints(): Int = numOfPrintedVehicles
     }
+}
+
+// === Inheritance ===
+enum class EngineType {
+    ELECTRIC, COMBUSTION
 }
 
 class Car(
@@ -37,8 +54,16 @@ class Car(
     }
 }
 
-//class types
-//Data class
+// Example Class with Companion Object
+class ExampleClass {
+    companion object {
+        fun exampleMethod(s: String): String {
+            return s.reversed()
+        }
+    }
+}
+
+// === Data Classes ===
 data class Contact(
     val firstName: String,
     val lastName: String,
@@ -50,28 +75,31 @@ data class Contact(
 
 data class SmallContact(
     val name: String,
-    val nummer: String
+    val number: String
 )
 
-// Flyweight
+// === Design Patterns ===
+
+// Flyweight Pattern
 enum class PlayerColor {
     BLUE, BLACK
 }
 
-class Player private constructor (val playerColor: PlayerColor) {
+class Player private constructor(val playerColor: PlayerColor) {
     private var points: Int = 0
 
     companion object {
         private var INSTANCES: MutableMap<PlayerColor, Player> = mutableMapOf()
+
         fun getPlayer(playerColor: PlayerColor): Player {
             return INSTANCES[playerColor] ?: Player(playerColor).also { INSTANCES[playerColor] = it }
         }
     }
 }
 
-//Singleton
+// Singleton Pattern
 class Database private constructor() {
-    companion object{
+    companion object {
         private var INSTANCE: Database? = null
 
         fun getDatabase(): Database {
@@ -79,52 +107,34 @@ class Database private constructor() {
         }
 
         private fun build(): Database {
-            //Stuff
+            // Database initialization logic here
             return Database()
         }
     }
 }
 
+// Using object keyword for Singleton
 object AppContainer {
-    val contactTable: List<String> by lazy {
-        listOf()
-    }
+    val contactTable = listOf<Contact>()
+    val playerTable = listOf<Player>()
 }
 
-//abstract class
-abstract class Person(protected val name: String) {
-    private var callCount: Int = 0
-    protected fun logCalls() {
-        callCount++
-        println("Schon $callCount mal gecallt.")
-    }
-
+// === Abstract Classes ===
+abstract class Superhero {
+    abstract val name: String
     abstract fun greet()
 }
 
-class Dominik: Person("Dominik"){
+class Batman : Superhero() {
+    override val name = "Batman"
     override fun greet() {
-        println("Hallo, mein Name ist $name")
-        logCalls()
+        println("I am $name")
     }
 }
 
-class Anna: Person("Anna"){
-    override fun greet(){
-        println("Hi, ich bin $name")
-        logCalls()
+class Robin : Superhero() {
+    override val name = "Robin"
+    override fun greet() {
+        println("I am $name, the sidekick")
     }
 }
-
-//Interface
-interface NavigationDestination {
-    val route: String
-    val titleRes: Int
-}
-
-object ContactDetailsScreen: NavigationDestination {
-    override val route = "contact_details"
-    override val titleRes = 0
-}
-
-
