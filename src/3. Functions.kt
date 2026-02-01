@@ -17,23 +17,12 @@ fun smartGreet(name: String) {
     println("Hello ${capitalizeFirstChar(name)}")
 }
 
+
 // === Higher-Order Functions ===
 fun freeGreet(name: String, manipulationFun: (String) -> String) {
     println("Hello ${manipulationFun(name)}")
 }
 
-// Using a function reference:
-// freeGreet("bRucE", ::capitalizeFirstChar)
-
-// Using a lambda expression:
-// freeGreet("Bruce") { name ->
-//     name.toCharArray().sorted().joinToString("")
-// }
-
-// Using implicit 'it':
-// freeGreet("Bruce") {
-//     it.toCharArray().sorted().joinToString("")
-// }
 
 // === Extension Functions ===
 
@@ -43,19 +32,9 @@ fun GermanState.next(): GermanState {
     return values[(ordinal + 1) % values.size]
 }
 
-// Generic Extension Function
-inline fun <reified T: Enum<T>> T.next(): T {
-    val values = enumValues<T>()
-    return values[(ordinal + 1) % values.size]
-}
-
-enum class Direction {
-    NORTH, EAST, SOUTH, WEST
-}
-
-// Extension Function with Generic Type
-inline fun <reified T: Any> List<T>.printTypeInfo() {
-    println("This is a list with elements of type ${T::class}")
+// Extension Function for String
+fun String.capitalizeFirstChar2(): String {
+    return this.lowercase().replaceFirstChar { it.uppercase() }
 }
 
 // Extension Function with Type Constraint
@@ -66,5 +45,22 @@ fun <T : Number> List<T>.newSum(): Double {
     }
     return output
 }
+
+// Generic Extension Function
+inline fun <reified T: Enum<T>> T.next(): T {
+    val values = enumValues<T>()
+    return values[(ordinal + 1) % values.size]
+}
+
+enum class CardinalDirections {
+    NORTH, EAST, SOUTH, WEST
+}
+
+// Extension Function with Generic Type
+inline fun <reified T: Any> List<T>.printTypeInfo() {
+    println("This is a list with elements of type ${T::class}")
+}
+
+
 
 

@@ -9,10 +9,7 @@ val implicit = 42                        // Type inferred as Int
 
 // === Mutability: val vs var ===
 val unchangeable = "I stay the same"
-// unchangeable = "New"  // Compilation error!
-
 var mutableTrue: Boolean = true
-// mutableTrue = false  // OK
 
 // === Boolean ===
 val thisIsTrue: Boolean = true
@@ -62,3 +59,9 @@ val precisionOfFloat = 12345612.0F
 val power1 = 2.0.pow(3)
 val power2 = Math.pow(2.0, 3.0)
 val power3 = 1 shl 3 // 0001 -> 1000
+
+// Null
+val nothing = null
+
+// Unit
+val noReturn = Unit

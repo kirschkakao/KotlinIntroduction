@@ -14,6 +14,8 @@ val crazyNameList: List<String?> = listOf(
     "doMinik", "saschA", "saSCHA", null, "Laura", "Dominik", "kai", "Sascha"
 )
 
+val cleanList = crazyNameList.filterNotNull()
+
 // === Chaining Operations ===
 val sortedDistinctNameList: List<String> = crazyNameList
     .filterNotNull()               // Removes nulls
@@ -32,14 +34,17 @@ val frequencyNameList: List<Pair<String, Int>> = crazyNameList
 
 // === fold ===
 val integerList: List<Int?> = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, null)
+
 val summedList = integerList.fold(0) { acc, i -> acc + (i ?: 0) * 2 }
+
+val stringResult = integerList.fold(StringBuilder("Numbers: ")) { acc, i ->
+    if (i != null) acc.append("$i ") else acc.append("null ")
+    acc
+}.toString()
+
+// === sumOf ===
 val otherSum = integerList.sumOf { (it ?: 0) } * 2
 
-// === Combining Null-Safety with Collections ===
-fun printBooksFromAuthor(author: String) {
-    val books = authorMap[author]?.joinToString(", ") ?: "No books found"
-    println(books)
-}
 
 // === Advanced Example: Fibonacci ===
 fun fibonacci(n: Int): List<Int> {

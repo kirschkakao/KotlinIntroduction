@@ -386,6 +386,17 @@ Enums are useful when you have a predefined set of values that a variable can ta
 val enumStates: List<GermanState> = listOf(GermanState.BAYERN)
 ```
 
+## Ranges
+Kotlin also provides Ranges, which represent a sequence of values. Ranges can be created using the `..` operator:
+
+```kotlin
+val oneToTen = 1..10
+val evenNumbers = 2..20 step 2
+val countdown = 10 downTo 1
+```
+
+Ranges are often used in loops and conditional statements.
+
 ## When to Use Which Collection?
 
 | Collection        | Use when...                                                                         |
@@ -397,6 +408,7 @@ val enumStates: List<GermanState> = listOf(GermanState.BAYERN)
 | **Map**           | Key-value mappings are needed, order doesn't matter                                 |
 | **LinkedHashMap** | Key-value mappings are needed, insertion order must be preserved                    |
 | **Enum**          | You have a fixed set of predefined constants with type safety                       |
+| **Range**         | You need a sequence of values, especially for loops and iterations                  |
 
 ## Summary
 
@@ -407,6 +419,7 @@ val enumStates: List<GermanState> = listOf(GermanState.BAYERN)
 - **Map**: Key-value pairs
 - **LinkedHashMap**: Key-value pairs with insertion order preserved
 - **Enum**: Fixed set of predefined constants with type safety
+- **Range**: Sequence of values useful for loops and iterations
 - Choose the right collection based on your requirements for order, uniqueness, and performance
 
 ## Further Reading

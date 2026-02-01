@@ -5,14 +5,11 @@ import kotlinx.coroutines.*
 const val dFine = "d-fine"
 const val slogan = "We define Consulting"
 
-// === The Problem with Threads ===
 fun normalThread() {
     println(dFine)
     Thread.sleep(1000)  // Blocks the thread
     println(slogan)
 }
-
-// === Basic Coroutines ===
 
 // Suspend function
 suspend fun defineConsulting() {
@@ -117,20 +114,6 @@ fun dispatcherExample() = runBlocking {
     // launch(Dispatchers.Main) {
     //     println("Main: ${Thread.currentThread().name}")
     // }
-}
-
-// === Exercise: Download Multiple Files ===
-suspend fun downloadFile(id: Int): String {
-    delay(1000)
-    return "File $id"
-}
-
-fun downloadMultipleFiles() = runBlocking {
-    val files = (1..5).map { id ->
-        async { downloadFile(id) }
-    }.awaitAll()
-
-    println(files)
 }
 
 

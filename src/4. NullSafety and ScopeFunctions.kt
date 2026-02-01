@@ -13,30 +13,21 @@ fun bar(s: String?): Int {
     return s?.length ?: 0  // Safe call and Elvis operator
 }
 
+// === Combining Null-Safety with Collections ===
+fun printBooksFromAuthor(author: String) {
+    val books = authorMap[author]?.joinToString(", ") ?: "No books found"
+    println(books)
+}
+
 // === Scope Functions ===
 
 // let - for null-safety
-fun letExample() {
-    val name: String? = "Kotlin"
+fun letExample(name: String?) {
     name?.let {
         println("Name is: $it")
         println("Length is: ${it.length}")
+        println("Uppercase: ${it.uppercase()}")
     }
-}
-
-// apply - configure object
-fun applyExample() {
-    val contact = Contact("Bruce", "Wayne", "123").apply {
-        // Can modify properties here if they were var
-    }
-}
-
-// also - side effects
-fun alsoExample() {
-    val numbers = mutableListOf(1, 2, 3)
-        .also { println("Before: $it") }
-        .apply { add(4) }
-        .also { println("After: $it") }
 }
 
 // run - execute block and return result
@@ -47,11 +38,32 @@ fun runExample() {
     }
 }
 
+// also - side effects
+fun alsoExample() {
+    val name = "Kotlin"
+        .also { println("Created: $it") }
+        .also { println("Length: ${it.length}") }
+    println("Final: $name")
+}
+
+// apply - configure object
+data class Book(var title: String = "", var author: String = "")
+
+fun applyExample() {
+    val book = Book().apply {
+        title = "1984"
+        author = "George Orwell"
+    }
+    println(book)
+}
+
 // with - execute block on object
 fun withExample() {
-    val contact = Contact("Bob", "Builder", "456")
-    with(contact) {
-        println("Name: $firstName")
-        println("Number: $mobileNumber")
+    val text = "Kotlin"
+
+    with(text) {
+        println("Text: $this")
+        println("Length: $length")
+        println("Uppercase: ${uppercase()}")
     }
 }

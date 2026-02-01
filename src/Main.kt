@@ -2,29 +2,39 @@ fun main() {
     println("=== Kotlin Introduction ===\n")
 
     // ===== Chapter 1: Primitives =====
-    // println(explicit)
-    // println(implicit)
-    // println(unchangeable)
-    // println(thisIsTrue)
+    // unchangeable = "New"  // Compilation error!
+    // mutableTrue = false   // OK
+
     // println(fullName)
     // println(firstLetterChar)
     // println(charInString)
-    // println(age)
+    // println(salaryAfterPromotion)
     // println(newSalary)
-    // println(veryLargeNumber + anotherLargeNumber)
+    // println(sum)
     // println(power1)
+    // println(power2)
+    // println(power3)
 
     // ===== Chapter 2: Collections =====
     // val (x, y) = coordinate
     // println("x: $x, y: $y")
+
     // println(germanStates)
-    // println(germanStateSet)
-    // mutableGermanStates.add("Hessen")
+    // println(newGermanStates)
+
+    // germanStates.add("Niedersachen") // This will cause a compilation error
+    // germanStates[0] = "Hamburg" // This will cause a compilation error
+
+    // mutableGermanStateSet.add("Bayern")
+    // println(mutableGermanStateSet)
     // println(mutableGermanStates)
-    // println(authorMap)
+
+    // println(sortedStateSet)
+
+    // println(authorMap["J.R.R. Tolkien"])
+
     // mutableAuthorMap["J.K. Rowling"] = listOf("Harry Potter")
     // println(mutableAuthorMap)
-    // println(GermanState.BAYERN.next())
 
     // ===== Chapter 3: Functions =====
     // greet("Bruce")
@@ -34,15 +44,15 @@ fun main() {
     // freeGreet("Bruce") { it.reversed() }
     // freeGreet("Bruce") { it.toCharArray().sorted().joinToString("") }
     // println(GermanState.BAYERN.next())
-    // println(Direction.NORTH.next())
+    // println("hELLO wORLD".capitalizeFirstChar2())
+    // println(listOf(1, 2, 3).newSum())
+    // println(listOf(1.5, 2.5, 3.0).newSum())
+    // println(CardinalDirections.NORTH.next())
     // listOf(1).printTypeInfo()
-    // println(listOf(1, 2).newSum())
 
     // ===== Chapter 4: Null Safety & Scope Functions =====
-    // println(foo("Hello"))
-    // // println(foo(null))  // Compilation error!
-    // println(bar("Hello"))
-    // println(bar(null))
+    // notNullable = null  // Compilation error!
+    // nullable = null  // OK
 
     // Safe Call Operator Examples
     // val length = nullable?.length
@@ -52,23 +62,33 @@ fun main() {
     // val length2 = nullable?.length ?: 0
     // println(length2)
 
-    // Not-Null Assertion (use with caution!)
+    // println(foo("Hello"))
+    // println(foo(null))  // Compilation error!
+    // println(bar("Hello"))
+    // println(bar(null))
+
+    // printBooksFromAuthor("J.R.R. Tolkien")
+    // printBooksFromAuthor("Unknown Author")
+
+    // Not-Null Assertion
     // val length3 = nullable!!.length  // Throws NPE if nullable is null
 
     // Scope Functions
+    // letExample("Kotlin")
     // letExample()
-    // applyExample()
-    // alsoExample()
     // runExample()
+    // alsoExample()
+    // applyExample()
     // withExample()
 
     // ===== Chapter 5: Functional Patterns =====
     // println(sanitizedList)
+    // println(cleanList)
     // println(sortedDistinctNameList)
     // println(frequencyNameList)
-    // println("Sum: $summedList, Other Sum: $otherSum")
-    // printBooksFromAuthor("J.R.R. Tolkien")
-    // printBooksFromAuthor("Unknown Author")
+    // println(summedList)
+    // println(stringResult)
+    // println(otherSum)
     // println(fibonacci(8))
 
     // ===== Chapter 6: Classes =====
@@ -81,6 +101,8 @@ fun main() {
 
     // val car = Car("VW Golf", TerrainType.LAND, EngineType.COMBUSTION)
     // car.print()
+    // println(Vehicle.getNumOfPrints())
+    // aircraft.print()
     // println(Vehicle.getNumOfPrints())
 
     // var contact = Contact("Bruce", "Wayne", "+123456789")
@@ -95,13 +117,24 @@ fun main() {
     // println("$name: $number")
 
     // val blue = Player.getPlayer(PlayerColor.BLUE)
-    // val black = Player.getPlayer(PlayerColor.BLUE)
-    // println(blue === black)  // true (same instance)
+    // val blue2 = Player.getPlayer(PlayerColor.BLUE)
+    // println(blue === blue2)
 
-    // val batman = Batman()
-    // val robin = Robin()
-    // batman.greet()
-    // robin.greet()
+    // val db1 = Database.getDatabase()
+    // val db2 = Database.getDatabase()
+    // println(db1 === db2)
+
+    // val bruce = Batman()
+    // al dick = Robin()
+    // val dick2 = Robin()
+    // bruce.greet()
+    // dick.greet()
+    // dick2.greet()
+
+    // val button = Button()
+    // button.click()
+    // button.focus()
+    // button.blur()
 
     // ===== Chapter 7: Coroutines =====
     // println("start")
@@ -125,6 +158,4 @@ fun main() {
     //     awaitAllExample()
     // }
     // println("AwaitAll: $time3 ms")
-
-    // downloadMultipleFiles()
 }

@@ -29,10 +29,6 @@ open class Vehicle(
         println(buildOutputString())
     }
 
-    fun whatsGoingOn(s: String): String {
-        return modelName
-    }
-
     companion object {
         private var numOfPrintedVehicles: Int = 0
         fun getNumOfPrints(): Int = numOfPrintedVehicles
@@ -51,15 +47,6 @@ class Car(
 ) : Vehicle(modelName, terrainType) {
     override fun buildOutputString(): String {
         return "${super.buildOutputString()} and has a ${capitalizeFirstChar(engineType.toString())} engine"
-    }
-}
-
-// Example Class with Companion Object
-class ExampleClass {
-    companion object {
-        fun exampleMethod(s: String): String {
-            return s.reversed()
-        }
     }
 }
 
@@ -120,21 +107,55 @@ object AppContainer {
 }
 
 // === Abstract Classes ===
-abstract class Superhero {
-    abstract val name: String
+abstract class Hero(protected val name: String) {
+    private var ownCallCount: Int = 0
+
+    protected fun logCalls() {
+        callCount++
+        ownCallCount++
+        println("I was called $ownCallCount times but in general there were already $callCount calls.")
+    }
+
     abstract fun greet()
-}
 
-class Batman : Superhero() {
-    override val name = "Batman"
-    override fun greet() {
-        println("I am $name")
+    companion object {
+        private var callCount: Int = 0
     }
 }
 
-class Robin : Superhero() {
-    override val name = "Robin"
+class Batman : Hero("Bruce") {
     override fun greet() {
-        println("I am $name, the sidekick")
+        println("I am Batm.. ah no shit I meant I am $name")
+        logCalls()
     }
+}
+
+class Robin : Hero("Dick") {
+    override fun greet() {
+        println("Hi, I am $name")
+        logCalls()
+    }
+}
+
+// === Interfaces ===
+interface Clickable {
+    fun click()
+}
+
+interface Focusable {
+    fun focus()
+    fun blur() {
+        println("Lost focus")  // Default implementation
+    }
+}
+
+class Button : Clickable, Focusable {
+    override fun click() {
+        println("Button clicked")
+    }
+
+    override fun focus() {
+        println("Button focused")
+    }
+    // blur() is inherited with default implementation
 }
