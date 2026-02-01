@@ -73,7 +73,7 @@ Wait for the IDE to finish importing the project (lower right)
 
 After the import is finished, your project structure should look like this (note for example the now blue squares and folders):
 
-![new project](.images/initial_project_structure.png)
+![new project](images/initial_project_structure.png)
 
 Right click the blue `Kotlin`-folder and choose `New -> Kotlin Class/File`. Then add a Main.kt file:
 
