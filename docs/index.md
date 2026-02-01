@@ -65,23 +65,23 @@ Asynchronous Programming, launch, async/await, Structured Concurrency
 
 Start IntelliJ and create a new Kotlin Project using `File -> New -> Project...` and then choosing Kotlin on the left. Setup your Project like shown and click `Create`:
 
-![new project](../../images/day1/kotlin_introduction/new_project.png)
+![new project](images/new_project.png)
 
 Wait for the IDE to finish importing the project (lower right)
 
-![new project](../../images/day1/kotlin_introduction/import_project.png)
+![new project](images/import_project.png)
 
 After the import is finished, your project structure should look like this (note for example the now blue squares and folders):
 
-![new project](../../images/day1/kotlin_introduction/initial_project_structure.png)
+![new project](.images/initial_project_structure.png)
 
 Right click the blue `Kotlin`-folder and choose `New -> Kotlin Class/File`. Then add a Main.kt file:
 
-![new project](../../images/day1/kotlin_introduction/new_main.png)
+![new project](images/new_main.png)
 
 Open the Main.kt and add a the `main()` function:
 
-![new project](../../images/day1/kotlin_introduction/main_fun.png)
+![new project](images/main_fun.png)
 
 Click the little green triangle/arrow left of the function to build/run the application. You are now set to follow along the course.
 
