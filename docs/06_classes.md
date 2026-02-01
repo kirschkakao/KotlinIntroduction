@@ -442,12 +442,11 @@ class Button : Clickable, Focusable {
 - **Copy function** enables immutable data manipulation of data class instances
 - **Companion objects** provide class-level (static-like) members
 - **Design Patterns**:
-  - **Flyweight**: Shares instances to save memory using a cache
-  - **Singleton**: Ensures only one instance exists (manual or via `object`)
-  - **Object declarations**: Kotlin's elegant, thread-safe singleton syntax
+    - **Flyweight**: Shares instances to save memory using a cache
+    - **Singleton**: Ensures only one instance exists (manual or via `object`)
+    - **Object declarations**: Kotlin's elegant, thread-safe singleton syntax
 - **Abstract classes** define shared implementation and state for subclasses
 - **Interfaces** define pure contracts and support multiple inheritance
-- Choose the right type based on your needs: state, instantiation, and inheritance requirements
 
 ## Best Practices
 
@@ -457,12 +456,10 @@ class Button : Clickable, Focusable {
 4. **Choose wisely between abstract classes and interfaces**:
     - Use **abstract classes** when you need shared state or partial implementation
     - Use **interfaces** when defining pure contracts or needing multiple inheritance
-
 5. **Leverage companion objects**: Use them for factory methods, constants, and class-level utilities
 6. **Apply design patterns appropriately**:
     - **Flyweight** for memory-intensive scenarios with many similar objects
     - **Singleton** for shared resources (databases, configurations, loggers)
-
 7. **Use `copy()` for immutability**: When working with data classes, prefer `copy()` over mutation
 8. **Destructuring for readability**: Use destructuring with data classes when you need multiple properties
 9. **Visibility modifiers**: Use `protected` for inheritance-specific members and `private` for internal implementation

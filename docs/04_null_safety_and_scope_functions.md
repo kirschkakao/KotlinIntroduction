@@ -344,11 +344,11 @@ with(person) {
 - **Elvis (`?:`)**: Provides default values for null cases
 - **Not-Null Assertion (`!!`)**: Forces the compiler to treat a nullable value as non-null (avoid this!)
 - **Scope Functions**: Allow executing code in the context of a specific object:
-  - **`let`**: Primary function for **null-safety** - executes block only for non-null values using `it`
-  - **`run`**: For multiple operations returning a result, uses `this` reference
-  - **`also`**: For side effects and chaining operations, returns original object
-  - **`apply`**: For builder pattern and object initialization, returns original object
-  - **`with`**: For multiple operations on a non-null object
+    - **`let`**: Primary function for **null-safety** - executes block only for non-null values using `it`
+    - **`run`**: For multiple operations returning a result, uses `this` reference
+    - **`also`**: For side effects and chaining operations, returns original object
+    - **`apply`**: For builder pattern and object initialization, returns original object
+    - **`with`**: For multiple operations on a non-null object
 
 ## Best Practices
 

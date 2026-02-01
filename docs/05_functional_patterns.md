@@ -328,10 +328,10 @@ This shows the power of `fold` - the result type (`List<Int>`) is completely ind
 ## Summary
 
 - **Functional Operations**: Transform and process collections declaratively
+- **Chaining**: Combine multiple operations for readable data pipelines
 - **`map`**: Transforms each element using a function
 - **`filter`**: Selects elements matching a predicate
 - **`filterNotNull`**: Removes null values from collections
-- **Chaining**: Combine multiple operations for readable data pipelines
 - **`groupBy`**: Groups elements by a key function
 - **`fold`**: Reduces collections to single values
 - **`sumOf`**: Convenient function for summing transformed values
