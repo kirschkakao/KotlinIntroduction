@@ -153,6 +153,14 @@ val length = nullable!!.length  // Throws NPE if nullable is null
     NullPointerException (if uncommented)
     ```
 
+### Null-Operators Overview
+
+| Operator | Usage                      | Example          |
+|----------|----------------------------|------------------|
+| `?.`     | Safe Call                  | `s?.length`      |
+| `?:`     | Elvis (Default)            | `s?.length ?: 0` |
+| `!!`     | Not-null Assertion         | `s!!.length`     |
+
 ## Scope Functions
 
 Scope functions allow you to execute a block of code in the context of a specific object. They enable concise and readable code by allowing you to perform operations on an object without repeatedly referencing it. The most important scope function for null-safety is `let`, while `run`, `also`, `apply`, and `with` are useful for other purposes.
@@ -318,22 +326,13 @@ with(person) {
 
 ### Scope Functions Comparison
 
-| Function | Parameter | Return Value | Primary Use Case |
-|----------|-----------|--------------|-----------------|
-| `let` | `it` | Lambda result | **Null-checking**, transforming nullable values |
-| `run` | `this` | Lambda result | Multiple operations, returning computed value |
-| `also` | `it` | Original object | Side effects, chaining operations |
-| `apply` | `this` | Original object | Builder pattern, object initialization |
-| `with` | `this` | Lambda result | Multiple operations on a non-null object |
-
-## Important Operators Overview
-
-| Operator | Usage | Example |
-|----------|-------|---------|
-| `?.` | Safe Call | `s?.length` |
-| `?:` | Elvis (Default) | `s?.length ?: 0` |
-| `!!` | Not-null Assertion (⚠️ avoid!) | `s!!.length` |
-| `let` | Null-safe scoped execution | `s?.let { ... }` |
+| Function | Parameter | Return Value    | Primary Use Case                                |
+|----------|-----------|-----------------|-------------------------------------------------|
+| `let`    | `it`      | Lambda result   | **Null-checking**, transforming nullable values |
+| `run`    | `this`    | Lambda result   | Multiple operations, returning computed value   |
+| `also`   | `it`      | Original object | Side effects, chaining operations               |
+| `apply`  | `this`    | Original object | Builder pattern, object initialization          |
+| `with`   | `this`    | Lambda result   | Multiple operations on a non-null object        |
 
 
 ## Summary
