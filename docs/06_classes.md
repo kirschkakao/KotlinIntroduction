@@ -448,22 +448,6 @@ class Button : Clickable, Focusable {
 - **Abstract classes** define shared implementation and state for subclasses
 - **Interfaces** define pure contracts and support multiple inheritance
 
-## Best Practices
-
-1. **Default to `final`**: Mark classes as `open` only when inheritance is explicitly desired - Kotlin's default is safer
-2. **Use data classes for DTOs**: Perfect for Data Transfer Objects, API responses, and database entities
-3. **Prefer `object` for singletons**: Use object declarations instead of manual singleton implementations
-4. **Choose wisely between abstract classes and interfaces**:
-    - Use **abstract classes** when you need shared state or partial implementation
-    - Use **interfaces** when defining pure contracts or needing multiple inheritance
-5. **Leverage companion objects**: Use them for factory methods, constants, and class-level utilities
-6. **Apply design patterns appropriately**:
-    - **Flyweight** for memory-intensive scenarios with many similar objects
-    - **Singleton** for shared resources (databases, configurations, loggers)
-7. **Use `copy()` for immutability**: When working with data classes, prefer `copy()` over mutation
-8. **Destructuring for readability**: Use destructuring with data classes when you need multiple properties
-9. **Visibility modifiers**: Use `protected` for inheritance-specific members and `private` for internal implementation
-
 ## Further Reading
 
 - [Kotlin Documentation: Classes](https://kotlinlang.org/docs/classes.html)

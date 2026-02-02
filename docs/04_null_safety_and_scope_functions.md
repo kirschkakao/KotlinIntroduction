@@ -350,26 +350,6 @@ with(person) {
     - **`apply`**: For builder pattern and object initialization, returns original object
     - **`with`**: For multiple operations on a non-null object
 
-## Best Practices
-
-1. **Avoid `!!` whenever possible** - it defeats the purpose of null-safety and can cause runtime crashes
-2. **Use `?.` and `?:` for safe null handling** - they make your code safer and more readable
-3. **Prefer nullable types over lateinit** when the value might legitimately be null
-4. **Use `let` with `?.` for null-safe operations** - the combination is one of Kotlin's most elegant features:
-   ```kotlin
-   value?.let { nonNullValue ->
-       // Safe operations here
-   }
-   ```
-
-5. **Choose the right scope function for non-null operations**:
-    - **`run`** when you need to return a computed result
-    - **`also`** for side effects and chaining
-    - **`apply`** for object initialization (builder pattern)
-    - **`with`** for multiple operations on a single object
-
-6. **Design your APIs to minimize nullability** - make parameters non-nullable when possible
-
 ## Further Reading
 
 - [Kotlin Documentation: Null Safety](https://kotlinlang.org/docs/null-safety.html)

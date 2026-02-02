@@ -286,13 +286,6 @@ In general, inline functions can improve performance by reducing the overhead of
 - **Reified Type Parameters**: Make generic types available at runtime
 - **Inline Functions**: For performance optimization
 
-## Best Practices
-
-1. Use extension functions to make APIs more readable
-2. Use lambdas for short, simple functions
-3. Use `reified` only when really necessary (type information at runtime)
-4. Type bounds help make generic functions safe
-
 ## Further Reading
 
 - [Kotlin Documentation: Functions](https://kotlinlang.org/docs/functions.html)

@@ -336,15 +336,6 @@ This shows the power of `fold` - the result type (`List<Int>`) is completely ind
 - **`fold`**: Reduces collections to single values
 - **`sumOf`**: Convenient function for summing transformed values
 
-## Best Practices
-
-1. **Chain operations** for better readability instead of using intermediate variables
-2. **Use `filterNotNull()`** instead of manual null checks in map operations
-3. **Prefer `sumOf`** over `fold` when simply summing values
-4. **Use method references** (`::function`) when applicable for cleaner code
-5. **Keep lambda expressions simple** - extract complex logic into separate functions
-6. **Consider performance** - chaining creates intermediate collections (use `asSequence()` for large collections)
-
 ## Further Reading
 
 - [Kotlin Documentation: Collection Operations](https://kotlinlang.org/docs/collection-operations.html)
