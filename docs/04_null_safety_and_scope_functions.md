@@ -44,7 +44,9 @@ fun bar(s: String?): Int {
 
 The function `foo` accepts only non-nullable `String` parameters, while `bar` can accept nullable `String?` parameters.
 Therefore, inside bar we cannot directly access `s.length` because `s` might be `null`. Instead, 
-we use the safe call operator (`?.`) and the Elvis operator (`?:`) to handle the potential null value.
+we use null-check operators like the safe call operator (`?.`) and the Elvis operator (`?:`) to handle the potential null value.
+
+## Null-Check Operators
 
 ### Safe Call Operator (`?.`)
 
@@ -127,7 +129,7 @@ fun getUserName(userId: Int?): String {
     No books found
     ```
 
-## Not-Null Assertion (`!!`)
+### Not-Null Assertion (`!!`)
 
 The not-null assertion operator (`!!`) converts a nullable type to a non-nullable type. If the value is `null`, it throws a `NullPointerException`.
 
