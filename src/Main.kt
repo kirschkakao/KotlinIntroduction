@@ -92,8 +92,20 @@ fun main() {
     // println(fibonacci(8))
 
     // ===== Chapter 6: Classes =====
-    // val person = Person("Alice", "Smith")
+    // val person = Person("Bruce", "Wayne")
     // person.greet()
+
+    // println(BankAccount.getCreationRules())
+    // val emptyAccount = BankAccount(-50.0)
+    // val myBankAccount = BankAccount(100.0)
+    // myBankAccount.deposit(50.0)
+    // myBankAccount.withdraw(20.0)
+    // println(myBankAccount.balance) // Compilation error: balance is private
+    // println("Final balance: €${myBankAccount.getBalance()}")
+    // myBankAccount.transactionCount++ // Compilation error: transactionCount has a private setter
+    // println("Total transactions: ${myBankAccount.transactionCount}")
+
+
 
     // val aircraft = Vehicle("Boeing 747", TerrainType.AIR)
     // aircraft.print()

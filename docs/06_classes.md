@@ -1,6 +1,7 @@
 # Chapter 6: Classes and Objects
 
-Kotlin is an object-oriented language with modern features. In this chapter, you will learn about different types of classes.
+Kotlin is an object-oriented language with modern features. This chapter introduces classes as the basic building blocks 
+for modeling data and behavior.
 
 ## Basic Classes
 
@@ -17,7 +18,125 @@ class Person(
 }
 ```
 
-Class parameters defined in the primary constructor can be used as properties if prefixed with `val` or `var`.
+In Kotlin, you can define a primary **constructor** directly in the class header, as shown above. The `val` keyword 
+indicates that `firstName` and `lastName` are read-only **properties** of the class. If you want them to be mutable, 
+use `var` instead. The `greet()` function is a **method** of the `Person` class that prints a greeting using those
+properties. Unlike in Python or Java, there is no need for a separate `__init__` or constructor method to initialize 
+properties; the primary constructor handles it. Inside the class, you can refer to properties by name without `this.` 
+or `self.` unless there is a naming conflict.
+
+??? example "Try it out"
+    ```kotlin
+    val person = Person("Bruce", "Wayne")
+    person.greet()
+    ```
+    **Expected Result**:
+    ```
+    Hello, my name is Bruce Wayne
+    ```
+
+The following class shows a more complex example with a primary constructor, visibility modifiers, mutable properties, 
+an initializer block (`init`), and a companion object for static-like members:
+
+```kotlin
+class BankAccount(
+    initialBalance: Double,
+) {
+    private var balance: Double = 0.0
+
+    var transactionCount: Int = 0
+        private set
+
+    init {
+        if (initialBalance >= 0) balance = initialBalance
+        else println("initial balance was negative, defaulted to 0.")
+
+        println("Bank account created with an initial balance of $balance")
+    }
+
+    fun deposit(amount: Double) {
+        balance += amount
+        transactionCount++
+        println("Deposited €$amount. New balance: €$balance")
+    }
+
+    fun withdraw(amount: Double) {
+        balance -= amount
+        transactionCount++
+        println("Withdrew €$amount. New balance: €$balance")
+    }
+
+    fun getBalance(): Double = balance
+
+    companion object {
+        fun getCreationRules(): String {
+            return "To create a bank account, you need to provide an initial balance. " +
+                    "If the initial balance provided is negative, it defaults to 0"
+        }
+    }
+}
+```
+
+The `BankAccount` class has a primary constructor that takes an `initialBalance`. Because it has no `val` or `var`, it 
+is only a constructor parameter, not a property. The actual `balance` property is initialized in the `init` block based 
+on `initialBalance`.<br>
+The `init` block runs right after the primary constructor, which makes it a good place for validation and other one-time
+setup logic.
+
+??? example "Try it out"
+    ```kotlin
+    val emptyAccount = BankAccount(-50.0)
+    val myBankAccount = BankAccount(100.0)
+    ```
+    **Expected Result**:
+    ```
+    initial balance was negative, defaulted to 0.
+    Bank account created with an initial balance of 0.0
+    Bank account created with an initial balance of 100.0
+    ```
+
+The `balance` property is private and cannot be read or written directly from outside the class. Instead, it is modified
+through the `deposit()` and `withdraw()` methods and accessed through `getBalance()`.
+
+??? example "Try it out"
+    ```kotlin
+    // println(myBankAccount.balance) // Compilation error: balance is private
+    // myBankAccount.balance = 500.0 // Compilation error: balance is private
+    myBankAccount.deposit(50.0)
+    myBankAccount.withdraw(20.0)
+    println("Final balance: €${myBankAccount.getBalance()}")
+    ```
+    **Expected Result**:
+    ```
+    Deposited €50.0. New balance: €150.0
+    Withdrew €20.0. New balance: €130.0
+    Final balance: €130.0
+    ```
+
+The `transactionCount` property is mutable but has a private setter, so it can only be modified from within the class.
+
+??? example "Try it out"
+    ```kotlin
+    // myBankAccount.transactionCount++ // Compilation error: transactionCount has a private setter
+    println("Number of transactions: ${myBankAccount.transactionCount}") //OK
+    ```
+    **Expected Result**:
+    ```
+    Number of transactions: 2
+    ```
+
+The companion object lets you define members that belong to the class itself rather than to individual instances, 
+similar to static members in Java or C#. The `getCreationRules()` function can be called directly on the `BankAccount`
+class without creating an instance.
+
+??? example "Try it out"
+    ```kotlin
+    println(BankAccount.getCreationRules())
+    ```
+    **Expected Result**:
+    ```
+    To create a bank account, you need to provide an initial balance. If the initial balance provided is negative, it defaults to 0
+    ```
 
 ### Open Classes
 
@@ -49,8 +168,8 @@ open class Vehicle(
 }
 ```
 
-Functions marked as `protected` are accessible only within the class and its subclasses and functions marked as `open` can be overridden in subclasses.
-A `companion object` is like a static class in Java. It enables class variables and methods.
+Functions marked as `protected` are accessible only within the class and its subclasses, and functions marked as `open` 
+can be overridden in subclasses.
 
 ??? example "Try it out"
     ```kotlin
@@ -69,7 +188,8 @@ Since `getNumOfPrints()` is defined in the companion object, it can be accessed 
 
 ### Inheritance
 
-The Vehicle class can be extended by other classes, for example to specify different types of vehicles like cars, which have an engine type:
+The `Vehicle` class can be extended by other classes, for example to specify different types of vehicles like cars, 
+which have an engine type:
 
 ```kotlin
 enum class EngineType {
@@ -87,38 +207,14 @@ class Car(
 }
 ```
 
-The extension is done using the `:` symbol followed by the base class constructor call.
-The `super` keyword is used to access members of the base class like `buildOutputString()`.
-Since `numOfPrintedVehicles` is defined in the companion object of the base class, it is shared among all subclasses.
-Hence, calling `print()` on any subclass will increment the same counter.
-
-??? example "Try it out"
-    ```kotlin
-    val car = Car("VW Golf", TerrainType.LAND, EngineType.COMBUSTION)
-    car.print()
-    println(Vehicle.getNumOfPrints())
-    aircraft.print()
-    println(Vehicle.getNumOfPrints())
-    ```
-    **Expected Result**:
-    ```
-    This is a VW Golf. It operates on Land and has a Combustion engine
-    1
-    This is a Boing 747. It operates in Air
-    2
-    ```
+The extension is done using the `:` symbol followed by the base class constructor call. The `super` keyword is used 
+to access members of the base class like `buildOutputString()`. Since `numOfPrintedVehicles` is defined in the companion
+object of the base class, it is shared among all subclasses. Calling `print()` on any subclass increments the same 
+counter.
 
 ## Data Classes
 
-Data classes are specifically designed for holding data. The compiler automatically generates:
-- `equals()` / `hashCode()`
-- `toString()`
-- `copy()`
-- `componentN()` for destructuring
-
-Also, data classes can be marked as @Serializable for easy serialization. This means, for example, converting to and from JSON.
-Data classes are therefore ideal for DTOs (Data Transfer Objects) in networking or database operations. For example,
-let's assume we have a Contacts Table that can be queried using an API. Each returned row can be represented as an instance of the following data class:
+Data classes are specifically designed for holding data. The compiler automatically generates `equals()` / `hashCode()`, `toString()`, `copy()`, and `componentN()` for destructuring. Data classes can also be marked with `@Serializable` for easy serialization, for example to convert to and from JSON. They are therefore ideal for DTOs (Data Transfer Objects) in networking or database operations. For example, let's assume we have a Contacts table that can be queried using an API. Each returned row can be represented as an instance of the following data class:
 
 ```kotlin
 data class Contact(
@@ -187,18 +283,18 @@ val (name, nummer) = smallContact
 
 ## Design Patterns
 
-Design patterns are proven solutions to common programming problems. Kotlin's language features make it easy to implement many classic design patterns elegantly and concisely. Let's explore some commonly used patterns that are particularly well-suited for Kotlin.
+Design patterns are proven solutions to common programming problems. Kotlin's language features make many classic design
+patterns easy to implement in a concise, readable way. Let's explore a few that fit Kotlin particularly well.
 
 ### Flyweight Pattern
 
-The Flyweight pattern is a structural design pattern that **shares instances to save memory**. Instead of creating a new object every time one is requested, the pattern reuses existing instances when possible. This is particularly useful when you need many objects that share common state.
+The Flyweight pattern is a structural design pattern that **ensures only one instance per key exists**. Instead of 
+creating a new object every time one is requested, it reuses existing instances when possible. This is particularly 
+useful when you need many objects that share common state.
 
-In the example below, we implement a `Player` class where each player is identified by their color. Since we might have thousands of game pieces on a board but only two players (blue and black), it makes sense to share the player instances rather than creating a new `Player` object for each piece. The pattern ensures that for each `PlayerColor`, only one `Player` instance exists in memory.
-
-The key elements of this implementation are:
-- **Private constructor**: Prevents direct instantiation from outside the class
-- **Companion object**: Acts as a factory to manage and retrieve instances
-- **Instance cache**: A `MutableMap` stores already created instances by their color
+In the example below, we implement a `Player` class where each player is identified by their color. The pattern ensures 
+that for each `PlayerColor`, only one `Player` instance ever exists in memory. A private constructor prevents direct 
+instantiation, and the companion object acts as a factory and cache for created instances.
 
 ```kotlin
 enum class PlayerColor {
@@ -233,15 +329,14 @@ class Player private constructor(val playerColor: PlayerColor) {
 
 ### Singleton Pattern
 
-The Singleton pattern is a creational design pattern that **ensures only one instance of a class exists** throughout the application's lifecycle. This is useful for resources that should be shared globally, such as database connections, configuration managers, or logging systems.
+The Singleton pattern is a creational design pattern that **ensures only one instance of a class exists** throughout 
+the application's lifecycle. This is useful for resources that should be shared globally, such as database connections, 
+configuration managers, or logging systems.
 
-In the example below, we implement a `Database` class as a singleton. No matter how many times `getDatabase()` is called from different parts of the application, the same `Database` instance will be returned. This prevents multiple database connections from being created unnecessarily, which could waste resources and cause synchronization issues.
-
-The implementation uses:
-- **Private constructor**: Prevents external code from creating new instances using `Database()`
-- **Nullable INSTANCE variable**: Stores the single instance, initially `null`
-- **Factory method `getDatabase()`**: Provides controlled access to the instance
-- **Lazy initialization**: The instance is only created when first requested, not at application startup
+In the example below, we implement a `Database` class as a singleton. No matter how many times `getDatabase()` is called,
+the same `Database` instance will be returned. This prevents multiple database connections from being created 
+unnecessarily and keeps access consistent. A private constructor blocks external instantiation, while a nullable 
+`INSTANCE` variable and the `getDatabase()` factory method provide lazy, controlled access.
 
 ```kotlin
 class Database private constructor() {
@@ -273,15 +368,14 @@ class Database private constructor() {
 
 ### Object Declaration
 
-While the traditional Singleton pattern works well, Kotlin provides a more elegant and concise syntax for creating singletons: **object declarations**. An `object` in Kotlin is both a class declaration and a single instance of that class, combined into one statement. The Kotlin compiler handles all the singleton logic automatically—no companion objects, no private constructors, and no manual instance management needed.
+While the traditional Singleton pattern works well, Kotlin provides a more elegant and concise syntax for creating 
+singletons: **object declarations**. An `object` in Kotlin is both a class declaration and a single instance of that 
+class, combined into one statement. The Kotlin compiler handles all the singleton logic automatically.
 
-In the example below, we create an `AppContainer` object that serves as a dependency injection container for the application. The `contactTable` property uses **lazy initialization** with the `by lazy` delegate, meaning it won't be created until it's first accessed. This is a common pattern in Android development for managing application-level dependencies.
-
-Key advantages of object declarations:
-- **Concise syntax**: No boilerplate code required
-- **Thread-safe**: Kotlin guarantees thread-safe initialization
-- **Lazy by default**: The object is created only when first accessed
-- **Can implement interfaces**: Objects can inherit from classes and implement interfaces
+In the example below, we create an `AppContainer` object that serves as a dependency injection container for the 
+application. The `contactTable` property uses **lazy initialization** with the `by lazy` delegate, meaning it will not 
+be created until it is first accessed. This is a common pattern in Android development for managing application-level 
+dependencies.
 
 ```kotlin
 object AppContainer {
@@ -296,9 +390,9 @@ object AppContainer {
 
 ## Abstract Classes
 
-Abstract classes cannot be instantiated and serve as base classes. They can contain both abstract methods
-(without implementation) and concrete methods (with implementation). Subclasses must implement the abstract methods.
-Also, in contrast to interfaces, abstract classes can have state (properties) that is shared among subclasses, like the `callCount` below.
+Abstract classes cannot be instantiated and serve as base classes. They can contain both abstract methods (without 
+implementation) and concrete methods (with implementation). Subclasses must implement the abstract methods. In contrast 
+to interfaces, abstract classes can have state (properties) that is shared among subclasses, like the `callCount` below.
 
 ```kotlin
 abstract class Person(protected val name: String) {
@@ -354,13 +448,12 @@ class Robin : Person("Dick") {
 
 ## Interfaces
 
-Interfaces define **contracts** that classes must implement. They specify what a class must do, but not how it does it. Unlike abstract classes, interfaces cannot hold state (non-initialized properties), but they can contain:
-- Abstract properties (must be overridden)
-- Abstract methods (must be implemented)
-- Concrete methods with default implementations
-- Properties with custom getters
+Interfaces define **contracts** that classes must implement. They specify what a class must do, but not how it does it.
+Unlike abstract classes, interfaces cannot hold state (non-initialized properties), but they can still declare abstract 
+properties and methods, as well as default method implementations and properties with custom getters.
 
-Interfaces are particularly useful for defining common behavior across unrelated classes. For example, in Android development, navigation destinations share common properties regardless of their specific screen implementation:
+Interfaces are particularly useful for defining common behavior across unrelated classes. For example, in Android 
+development, navigation destinations share common properties regardless of their specific screen implementation:
 
 ```kotlin
 interface NavigationDestination {
@@ -415,23 +508,21 @@ class Button : Clickable, Focusable {
     Lost focus
     ```
 
-**When to use Interfaces vs. Abstract Classes:**
-- Use **interfaces** when you need to define pure contracts without shared state
-- Use **abstract classes** when you need to share state or implementation among subclasses
-- Interfaces support multiple inheritance, abstract classes don't
+When choosing between interfaces and abstract classes, use interfaces for pure contracts without shared state, and 
+abstract classes when you want to share state or implementation. Interfaces support multiple inheritance; abstract 
+classes do not.
 
 ## Class Types Comparison
 
-| Type | Use Case | Can Have State? | Can Be Instantiated? | Inheritance |
-|------|----------|----------------|---------------------|-------------|
-| **Regular Class** | General OOP, custom behavior | Yes | Yes | Single inheritance |
-| **Open Class** | Base class for inheritance | Yes | Yes | Can be extended |
-| **Data Class** | Data containers (DTOs, models) | Yes | Yes | Can inherit, limited extension |
-| **Abstract Class** | Shared implementation + contracts | Yes | No | Single inheritance |
-| **Interface** | Pure contracts, multiple behaviors | No (only getters) | No | Multiple inheritance |
-| **Object** | Singleton, utility functions | Yes | No (single instance) | Can implement interfaces |
-| **Companion Object** | Static-like members in classes | Yes | No | Part of enclosing class |
-| **Enum** | Fixed set of constants | Yes (per constant) | No (predefined) | Cannot be extended |
+| Type                 | Primary Use                        | Instantiable         | Inheritance          | Class-Level Members     |
+|----------------------|------------------------------------|----------------------|----------------------|-------------------------|
+| **Regular Class**    | General OOP, custom behavior       | Yes                  | Single inheritance   | Via companion object    |
+| **Open Class**       | Base class for inheritance         | Yes                  | Can be extended      | Via companion object    |
+| **Data Class**       | Data containers (DTOs, models)     | Yes                  | Can extend a class   | Via companion object    |
+| **Abstract Class**   | Shared base + contracts            | No                   | Single inheritance   | Via companion object    |
+| **Interface**        | Pure contracts and shared behavior | No                   | Multiple inheritance | Not applicable          |
+| **Object**           | Singleton or utility holder        | No (single instance) | Can extend/implement | N/A (it is the instance) |
+| **Companion Object** | Class-level helpers and factories  | No                   | N/A                  | Yes (static-like)       |
 
 ## Summary
 
@@ -442,7 +533,7 @@ class Button : Clickable, Focusable {
 - **Copy function** enables immutable data manipulation of data class instances
 - **Companion objects** provide class-level (static-like) members
 - **Design Patterns**:
-    - **Flyweight**: Shares instances to save memory using a cache
+    - **Flyweight**: Ensures only one instance per key (e.g., player color) exists
     - **Singleton**: Ensures only one instance exists (manual or via `object`)
     - **Object declarations**: Kotlin's elegant, thread-safe singleton syntax
 - **Abstract classes** define shared implementation and state for subclasses

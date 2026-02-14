@@ -10,6 +10,44 @@ class Person(
     }
 }
 
+class BankAccount(
+    initialBalance: Double,
+) {
+    private var balance: Double = 0.0
+
+    var transactionCount: Int = 0
+        private set
+
+    init {
+        if (initialBalance >= 0) balance = initialBalance
+        else println("initial balance was negative, defaulted to 0.")
+
+        println("Bank account created with an initial balance of $balance")
+    }
+
+    fun deposit(amount: Double) {
+        balance += amount
+        transactionCount++
+        println("Deposited €$amount. New balance: €$balance")
+    }
+
+    fun withdraw(amount: Double) {
+        balance -= amount
+        transactionCount++
+        println("Withdrew €$amount. New balance: €$balance")
+    }
+
+    fun getBalance(): Double = balance
+
+    companion object {
+        fun getCreationRules(): String {
+            return "To create a bank account, you need to provide an initial balance. " +
+                    "If the initial balance provided is negative, it defaults to 0"
+        }
+    }
+}
+
+
 // === Open Classes ===
 enum class TerrainType {
     LAND, WATER, AIR
