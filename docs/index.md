@@ -5,14 +5,7 @@ Welcome to the Kotlin Introduction! This tutorial will guide you step by step th
 ## What is Kotlin?
 
 Kotlin is a modern, statically typed programming language developed by JetBrains. It is fully interoperable with Java and runs on the Java Virtual Machine (JVM).
-
-## Why Kotlin?
-
-- **Modern**: Kotlin offers modern language features like Null-Safety, Extension Functions, and Coroutines
-- **Safe**: Through the static type system and Null-Safety, many errors are caught at compile time
-- **Interoperable**: Kotlin can seamlessly work with Java code
-- **Concise**: Less boilerplate code than Java
-- **Versatile**: Can be used for backend, Android, multiplatform, and more
+In comparison to Java it offers several advantages like modern language features developed from scratch, improved readability, and enhanced safety. Especially through the static type system and Null-Safety, many errors are caught at compile time. Kotlin also supports functional programming paradigms and has a concise syntax that reduces boilerplate code. It is widely used for Android development, backend development, and - as you might have guessed given the lecture - multiplatform projects.
 
 ## About This Course
 
@@ -86,16 +79,6 @@ Open the Main.kt and add a the `main()` function:
 Click the little green triangle/arrow left of the function to build/run the application. You are now set to follow along the course.
 
 You might want to add new files for every chapter to define variables and classes etc. to manage the contents. However, everything is executed through the main-function so you will have to add executable code like the given examples to `main` in order to run it.
-
-
-## Tips for Successful Learning
-
-!!! tip "Learning Tips"
-    - Take your time with each chapter
-    - Experiment with the examples
-    - Change values and observe what happens
-    - Try to create your own examples
-    - Take breaks between chapters
 
 ## Helpful Resources
 
