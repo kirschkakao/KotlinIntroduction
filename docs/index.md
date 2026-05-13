@@ -5,7 +5,7 @@ Welcome to the Kotlin Introduction! This tutorial will guide you step by step th
 ## What is Kotlin?
 
 Kotlin is a modern, statically typed programming language developed by JetBrains. It is fully interoperable with Java and runs on the Java Virtual Machine (JVM).
-In comparison to Java it offers several advantages like modern language features developed from scratch, improved readability, and enhanced safety. Especially through the static type system and Null-Safety, many errors are caught at compile time. Kotlin also supports functional programming paradigms and has a concise syntax that reduces boilerplate code. It is widely used for Android development, backend development, and - as you might have guessed given the lecture - multiplatform projects.
+In comparison to Java it offers several advantages like modern language features developed from scratch, improved readability, and enhanced safety. Especially through the static type system and Null-Safety, many errors are caught at compile time. Kotlin also supports functional programming paradigms and has a concise syntax that reduces boilerplate code. It is widely used for Android development, backend development, and - as you might have guessed - multiplatform projects.
 
 ## About This Course
 
@@ -46,13 +46,6 @@ Classes, Inheritance, Data Classes, Design Patterns, Abstract Classes, Interface
 
 ### [Chapter 7: Coroutines](07_coroutines.md)
 Asynchronous Programming, launch, async/await, Structured Concurrency
-
-## How to Work with the material
-
-1. **Read each chapter carefully**
-2. **Study the code examples and execute them in your IDE**
-3. **Compare your results** with the expected results
-4. **Experiment** with the examples
 
 ## Your Workspace
 
